@@ -10,7 +10,17 @@ export default function LeaveForm() {
   const [leaveCarActive, setLeaveCarActive] = useState(false);
   const [loadingLeaveCar, setLoadingLeaveCar] = useState(false);
   const [leaveCarConfirmed, setLeaveCarConfirmed] = useState(false);
+  const [showFormAfterConfirmation, setShowFormAfterConfirmation] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    if (paymentConfirmed) {
+      // Se o pagamento foi confirmado, mostra o formulário de saída após 3 segundos
+      setTimeout(() => {
+        setShowFormAfterConfirmation(true);
+      }, 3000);
+    }
+  }, [paymentConfirmed]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -86,9 +96,9 @@ export default function LeaveForm() {
             <button
               type="button"
               className={`leave-btn py-6 ${
-                plateNumber.length === 8 ? "" : "opacity-50 cursor-not-allowed"
+                !showFormAfterConfirmation ? "opacity-50 cursor-not-allowed" : ""
               }`}
-              disabled={plateNumber.length !== 8}
+              disabled={!showFormAfterConfirmation}
               onClick={() => handleLeaveCar()}
             >
               Saída
@@ -118,7 +128,7 @@ export default function LeaveForm() {
         </div>
       )}
 
-      {!leaveCarConfirmed && leaveCarActive && !loadingLeaveCar && (
+      {!leaveCarConfirmed && leaveCarActive && !loadingLeaveCar && showFormAfterConfirmation && (
         <div className="pp-leave-car">
           <p>Confirma a saída do veículo da placa abaixo?</p>
           <h3>{plateNumber}</h3>
