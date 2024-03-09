@@ -16,3 +16,38 @@
   --pp-white: #ffffff;
 }
 
+
+/* START Backgrounds */
+.pp-bg-blue{
+  background-color: var(--pp-blue);
+}
+ 
+.pp-bg-gray-light{
+  background-color: var(--pp-gray-light);
+}
+ 
+.pp-bg-green{
+  background-color: var(--pp-green);
+}
+ 
+.pp-bg-red-light{
+  background-color: var(--pp-red-light);
+}
+ 
+.pp-bg-orange{
+  background-color: var(--pp-orange);
+}
+ 
+.pp-bg-purple{
+  background-color: var(--pp-purple);
+}
+ 
+.pp-bg-yellow-light{
+  background-color: var(--pp-yellow-light);
+}
+ 
+.pp-bg-white{
+  background-color: var(--pp-white);
+}
+/* END Backgrounds */
+
