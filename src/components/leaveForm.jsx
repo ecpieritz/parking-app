@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 export default function LeaveForm() {
   const [plateNumber, setPlateNumber] = useState("");
@@ -109,22 +110,52 @@ export default function LeaveForm() {
 
       {showConfirmation && (
         <div className="pp-confirm">
-          <h3>Confirma o pagamento da placa abaixo?</h3>
+          <p>Confirma o pagamento da placa abaixo?</p>
           <h3>{plateNumber}</h3>
-          <button onClick={() => handleConfirm()}>Confirmar</button>
-          <button onClick={() => setShowConfirmation(false)}>Voltar</button>
+          <button className="purple-btn" onClick={() => handleConfirm()}>Confirmar</button>
+          <button className="blue-text-btn" onClick={() => setShowConfirmation(false)}>Voltar</button>
         </div>
       )}
 
       {loadingConfirmed && (
         <div className="pp-loading-confirm">
-          <p>Confirmando...</p>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              marginTop: '40px'
+            }}
+          >
+            <Image
+              src="\imgs\pp-icon--loading.svg"
+              alt="Descrição da imagem"
+              width={70}
+              height={70}
+            />
+          </div>
+          <p style={{textAlign: 'center', marginTop: '30px'}}>Confirmando...</p>
         </div>
       )}
 
       {paymentConfirmed && (
         <div className="pp-ok-confirm">
-          <p>Pago!</p>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              marginTop: '40px'
+            }}
+          >
+            <Image
+              src="\imgs\pp-icon--check.svg"
+              alt="Descrição da imagem"
+              width={70}
+              height={70}
+            />
+          </div>
+          <p style={{textAlign: 'center', marginTop: '30px'}}>Pago!</p>
         </div>
       )}
 
@@ -132,20 +163,50 @@ export default function LeaveForm() {
         <div className="pp-leave-car">
           <p>Confirma a saída do veículo da placa abaixo?</p>
           <h3>{plateNumber}</h3>
-          <button className="leave-car-btn" onClick={() => setLoadingLeaveCar(true)}>Liberar Saída</button>
-          <button onClick={() => setLeaveCarActive(false)}>Voltar</button>
+          <button className="leave-car-btn purple-btn" onClick={() => setLoadingLeaveCar(true)}>Liberar Saída</button>
+          <button className="blue-text-btn" onClick={() => setLeaveCarActive(false)}>Voltar</button>
         </div>
       )}
 
       {loadingLeaveCar && (
         <div className="pp-loading-leave-car">
-          <p>Confirmando...</p>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              marginTop: '40px'
+            }}
+          >
+            <Image
+              src="\imgs\pp-icon--loading.svg"
+              alt="Descrição da imagem"
+              width={70}
+              height={70}
+            />
+          </div>
+          <p style={{textAlign: 'center', marginTop: '30px'}}>Confirmando...</p>
         </div>
       )}
 
       {leaveCarConfirmed && (
         <div className="pp-ok-leave-car">
-          <p>Saída Liberada</p>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              marginTop: '40px'
+            }}
+          >
+            <Image
+              src="\imgs\pp-icon--check.svg"
+              alt="Descrição da imagem"
+              width={70}
+              height={70}
+            />
+          </div>
+          <p style={{textAlign: 'center', marginTop: '30px'}}>Saída Liberada</p>
         </div>
       )}
     </div>

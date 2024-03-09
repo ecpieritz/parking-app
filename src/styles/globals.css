@@ -178,6 +178,46 @@ main {
   color: var(--pp-gray-dark);
 }
 
+.pp-leave-form .pp-confirm{
+  text-align: center;
+  margin-top: 80px;
+  display: flex;
+  flex-direction: column;
+}
+
+.pp-leave-form .pp-confirm p{
+  font-size: 16px;
+  width: 30%;
+  margin: auto;
+}
+
+.pp-leave-form .pp-confirm h3{
+  font-size: 38px;
+  text-transform: uppercase;
+  color: var(--pp-blue);
+  margin-bottom: 20px;
+}
+
+.pp-leave-form .pp-leave-car{
+  text-align: center;
+  margin-top: 80px;
+  display: flex;
+  flex-direction: column;
+}
+
+.pp-leave-form .pp-leave-car p{
+  font-size: 16px;
+  width: 30%;
+  margin: auto;
+}
+
+.pp-leave-form .pp-leave-car h3{
+  font-size: 38px;
+  text-transform: uppercase;
+  color: var(--pp-blue);
+  margin-bottom: 20px;
+}
+
 @media(max-width: 760px){
   .pp-leave-form{
     width: 100%;
@@ -186,3 +226,28 @@ main {
   
 }
 /* END Leave Form */
+
+.purple-btn{
+  background-color: var(--pp-purple);
+  color: var(--pp-white);
+  padding: 20px;
+  text-transform: uppercase;
+  font-weight: 700;
+  border-radius: 4px;
+}
+
+.purple-btn:hover{
+  background-color: #93569e;
+}
+
+.blue-text-btn{
+  color: var(--pp-blue);
+  padding: 20px;
+  text-transform: uppercase;
+  font-weight: 700;
+  border-radius: 4px;
+}
+
+.blue-text-btn:hover{
+  color: #3db1c0;
+}
