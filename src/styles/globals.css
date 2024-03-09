@@ -74,5 +74,52 @@ main {
   border-bottom: 3px solid var(--pp-blue);
   color: var(--pp-blue);
 }
-
 /* END Menu */
+
+/* START Entrance Form */
+.pp-entrance-form{
+  width: 60%;
+}
+
+.pp-entrance-form label{
+  color: var(--pp-gray);
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+
+.pp-entrance-form input{
+  background-color: var(--pp-yellow-light);
+  border: 1px solid #CCCCCC;
+  border-radius: 4px;
+  color: var(--pp-gray);
+  text-align: center;
+  font-size: 28px;
+}
+
+.pp-entrance-form input:focus{
+  background-color: var(--pp-yellow-light);
+  color: #0A261D;
+  outline: 1px solid #CCCCCC;
+}
+
+.pp-entrance-form button{
+  width: 100%;
+  text-transform: uppercase;
+  border-radius: 4px;
+  background-color: var(--pp-green);
+  color: var(--pp-white);
+}
+
+.pp-entrance-form button:disabled{
+  background-color: var(--pp-gray-light);
+  color: var(--pp-gray-dark);
+}
+
+@media(max-width: 760px){
+  .pp-entrance-form{
+    width: 100%;
+    padding: 0 15px;
+  }
+  
+}
+/* END Entrance Form */

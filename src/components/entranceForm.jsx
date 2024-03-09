@@ -28,7 +28,7 @@ export default function EntranceForm() {
         </div>
         <button
           type="submit"
-          className={`bg-blue-500 text-white font-bold py-2 px-4 rounded ${plateNumber.length === 8 ? '' : 'opacity-50 cursor-not-allowed'}`}
+          className={`py-6 ${plateNumber.length === 8 ? '' : 'opacity-50 cursor-not-allowed'}`}
           disabled={plateNumber.length !== 8}
         >
           Confirmar Entrada
