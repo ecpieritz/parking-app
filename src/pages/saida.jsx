@@ -1,4 +1,5 @@
 import Header from "@/components/header";
+import LeaveForm from "@/components/leaveForm";
 import Menu from "@/components/menu";
 
 export default function Saida() {
@@ -11,7 +12,7 @@ export default function Saida() {
       >
         <Menu />
 
-        <h1>Saída</h1>
+        <LeaveForm />
 
       </main>
     </>
