@@ -123,3 +123,66 @@ main {
   
 }
 /* END Entrance Form */
+
+/* START Leave Form */
+.pp-leave-form{
+  width: 60%;
+}
+
+.pp-leave-form label{
+  color: var(--pp-gray);
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+
+.pp-leave-form input{
+  background-color: var(--pp-yellow-light);
+  border: 1px solid #CCCCCC;
+  border-radius: 4px;
+  color: var(--pp-gray);
+  text-align: center;
+  font-size: 28px;
+}
+
+.pp-leave-form input:focus{
+  background-color: var(--pp-yellow-light);
+  color: #0A261D;
+  outline: 1px solid #CCCCCC;
+}
+
+.pp-leave-form button.pay-btn{
+  width: 100%;
+  text-transform: uppercase;
+  border-radius: 4px;
+  background-color: var(--pp-purple);
+  color: var(--pp-white);
+}
+
+.pp-leave-form button.pay-btn:disabled{
+  background-color: var(--pp-gray-light);
+  color: var(--pp-gray-dark);
+}
+
+.pp-leave-form button.leave-btn{
+  width: 100%;
+  text-transform: uppercase;
+  border-radius: 4px;
+  background-color: var(--pp-white);
+  border: 3px solid var(--pp-purple);
+  color: var(--pp-purple);
+}
+
+.pp-leave-form button.leave-btn:disabled{
+  background-color: var(--pp-white);
+  border: 3px solid var(--pp-gray-dark);
+  color: var(--pp-gray-dark);
+}
+
+@media(max-width: 760px){
+  .pp-leave-form{
+    width: 100%;
+    padding: 0 15px;
+  }
+  
+}
+/* END Leave Form */
