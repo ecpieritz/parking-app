@@ -1,19 +1,25 @@
-import { Inter } from "next/font/google";
+import { useState } from 'react';
 import Header from "@/components/header";
 import Menu from "@/components/menu";
 import EntranceForm from "@/components/entranceForm";
 
-const inter = Inter({ subsets: ["latin"] });
-
 export default function Home() {
+  const [isMainVisible, setIsMainVisible] = useState(true);
+
+  const toggleMainVisibility = () => {
+    setIsMainVisible(!isMainVisible);
+  };
+
   return (
     <>
-      <Header />
+      <Header onToggleMain={toggleMainVisibility} />
 
-      <main className={`flex flex-col items-center justify-between py-12`}>
-        <Menu />
-        <EntranceForm />
-      </main>
+      {isMainVisible && (
+        <main className={`flex flex-col items-center justify-between py-12`}>
+          <Menu />
+          <EntranceForm />
+        </main>
+      )}
     </>
   );
 }

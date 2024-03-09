@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { useState, useEffect } from 'react';
 
-export default function Header() {
+export default function Header({ onToggleMain }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+    onToggleMain(); // Altera a visibilidade do main quando o menu é aberto/fechado
   };
 
   const [windowWidth, setWindowWidth] = useState(0);
@@ -32,7 +33,7 @@ export default function Header() {
         </div>
         <nav className="hidden md:block">
           <ul className="flex space-x-4">
-            <li className="hover:underline"><Link href="/entrada">Entrada</Link></li>
+            <li className="hover:underline"><Link href="/">Entrada</Link></li>
             <li className="hover:underline"><Link href="/saida">Saída</Link></li>
           </ul>
         </nav>
@@ -46,9 +47,9 @@ export default function Header() {
       </div>
       {/* Menu hamburguer */}
       {isOpen && (
-        <div className="md:hidden">
+        <div className="md:hidden" style={{height: '92.7vh', overflowY: 'hidden'}}>
           <ul className="mt-2">
-            <li className="block px-4 py-2 text-sm text-white"><Link href="/entrada">Entrada</Link></li>
+            <li className="block px-4 py-2 text-sm text-white"><Link href="/">Entrada</Link></li>
             <li className="block px-4 py-2 text-sm text-white"><Link href="/saida">Saída</Link></li>
           </ul>
         </div>
