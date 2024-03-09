@@ -9,6 +9,7 @@ export default function Saida() {
       <main
         className={`flex flex-col items-center justify-between py-12`}
       >
+        <Menu />
 
         <h1>Saída</h1>
 

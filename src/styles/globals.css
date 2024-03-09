@@ -16,38 +16,63 @@
   --pp-white: #ffffff;
 }
 
+main {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+* {
+  font-size: 16px;
+}
 
 /* START Backgrounds */
-.pp-bg-blue{
+.pp-bg-blue {
   background-color: var(--pp-blue);
 }
- 
-.pp-bg-gray-light{
+
+.pp-bg-gray-light {
   background-color: var(--pp-gray-light);
 }
- 
-.pp-bg-green{
+
+.pp-bg-green {
   background-color: var(--pp-green);
 }
- 
-.pp-bg-red-light{
+
+.pp-bg-red-light {
   background-color: var(--pp-red-light);
 }
- 
-.pp-bg-orange{
+
+.pp-bg-orange {
   background-color: var(--pp-orange);
 }
- 
-.pp-bg-purple{
+
+.pp-bg-purple {
   background-color: var(--pp-purple);
 }
- 
-.pp-bg-yellow-light{
+
+.pp-bg-yellow-light {
   background-color: var(--pp-yellow-light);
 }
- 
-.pp-bg-white{
+
+.pp-bg-white {
   background-color: var(--pp-white);
 }
+
 /* END Backgrounds */
 
+/* START Menu */
+.pp-menu {
+  width: 100%;
+}
+
+.pp-menu a {
+  width: 50%;
+  text-align: center;
+}
+
+.pp-menu a.active {
+  border-bottom: 3px solid var(--pp-blue);
+  color: var(--pp-blue);
+}
+
+/* END Menu */
