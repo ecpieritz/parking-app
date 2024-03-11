@@ -34,12 +34,14 @@ export default function EntranceForm() {
       });
 
       if (response.ok) {
-        setIsRegistered(true);
         setTimeout(() => {
           setIsRegistering(false);
-          setIsRegistered(false);
-          setPlateNumber("");
-        }, 3000); // Mostrar "Registrado!" por 3 segundos
+          setTimeout(() => {
+            setIsRegistered(false);
+            setPlateNumber("");
+          }, 3000); // Mostrar "Registrado!" por 3 segundos
+        }, 3000); // Mostrar "Registrando..." por 3 segundos
+        setIsRegistered(true);
       } else {
         throw new Error('Erro ao enviar dados para a API');
       }
@@ -71,6 +73,15 @@ export default function EntranceForm() {
     }
 
     return timeString;
+  };
+
+  // Função para validar a entrada do usuário
+  const handleInputChange = (event) => {
+    const { value } = event.target;
+    const regex = /^[A-Z0-9-]*$/; // Expressão regular para aceitar apenas números, '-' e letras maiúsculas
+    if (regex.test(value) || value === "") {
+      setPlateNumber(value);
+    }
   };
 
   return (
@@ -136,7 +147,7 @@ export default function EntranceForm() {
               id="entrance-plate"
               name="entrance-plate"
               value={plateNumber}
-              onChange={(e) => setPlateNumber(e.target.value)}
+              onChange={handleInputChange}
               className="border border-gray-400 rounded-md p-2 w-full"
               maxLength={8}
               placeholder="AAA-0000"
