@@ -9,13 +9,14 @@ export default function EntranceForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setIsRegistering(true);
-    
+
     // Gerando um valor de tempo randomico entre 1 segundo e 7 dias em milissegundos
-    const randomTime = Math.floor(Math.random() * (7 * 24 * 60 * 60 * 1000 - 1000)) + 1000;
-    
+    const randomTime =
+      Math.floor(Math.random() * (7 * 24 * 60 * 60 * 1000 - 1000)) + 1000;
+
     // Gerando um ID aleatório de 6 dígitos para a reserva
     const reservationId = Math.floor(100000 + Math.random() * 900000);
-    
+
     const data = {
       plate: plateNumber,
       time: convertTime(randomTime), // Convertendo o valor de tempo para um formato legível
@@ -25,10 +26,10 @@ export default function EntranceForm() {
     };
 
     try {
-      const response = await fetch('/api/parking', {
-        method: 'POST',
+      const response = await fetch("/api/parking", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
       });
@@ -36,17 +37,17 @@ export default function EntranceForm() {
       if (response.ok) {
         setTimeout(() => {
           setIsRegistering(false);
+          setIsRegistered(true);
           setTimeout(() => {
             setIsRegistered(false);
             setPlateNumber("");
           }, 3000); // Mostrar "Registrado!" por 3 segundos
-        }, 3000); // Mostrar "Registrando..." por 3 segundos
-        setIsRegistered(true);
+        }, 3000); // Tempo entre o envio e o retorno do registro
       } else {
-        throw new Error('Erro ao enviar dados para a API');
+        throw new Error("Erro ao enviar dados para a API");
       }
     } catch (error) {
-      console.error('Erro:', error);
+      console.error("Erro:", error);
       // Lidar com erros de requisição
     }
   };
@@ -54,11 +55,15 @@ export default function EntranceForm() {
   // Função para converter milissegundos em formato legível
   const convertTime = (milliseconds) => {
     const days = Math.floor(milliseconds / (24 * 60 * 60 * 1000));
-    const hours = Math.floor((milliseconds % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000));
-    const minutes = Math.floor((milliseconds % (60 * 60 * 1000)) / (60 * 1000));
+    const hours = Math.floor(
+      (milliseconds % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000)
+    );
+    const minutes = Math.floor(
+      (milliseconds % (60 * 60 * 1000)) / (60 * 1000)
+    );
     const seconds = Math.floor((milliseconds % (60 * 1000)) / 1000);
 
-    let timeString = '';
+    let timeString = "";
     if (days > 0) {
       timeString += `${days} days `;
     }
@@ -93,7 +98,7 @@ export default function EntranceForm() {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              marginTop: '40px'
+              marginTop: "40px",
             }}
           >
             <Image
@@ -104,10 +109,14 @@ export default function EntranceForm() {
             />
           </div>
 
-          <p style={{
-            textAlign: 'center',
-            marginTop: '20px'
-          }}>Registrando...</p>
+          <p
+            style={{
+              textAlign: "center",
+              marginTop: "20px",
+            }}
+          >
+            Registrando...
+          </p>
         </div>
       )}
       {isRegistered && (
@@ -117,7 +126,7 @@ export default function EntranceForm() {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              marginTop: '40px'
+              marginTop: "40px",
             }}
           >
             <Image
@@ -127,10 +136,14 @@ export default function EntranceForm() {
               height={70}
             />
           </div>
-          <p style={{
-            textAlign: 'center',
-            marginTop: '20px'
-          }}>Registrado!</p>
+          <p
+            style={{
+              textAlign: "center",
+              marginTop: "20px",
+            }}
+          >
+            Registrado!
+          </p>
         </div>
       )}
       {!isRegistering && !isRegistered && (
@@ -156,7 +169,9 @@ export default function EntranceForm() {
           <button
             type="submit"
             className={`py-6 ${
-              plateNumber.length === 8 ? "" : "opacity-50 cursor-not-allowed"
+              plateNumber.length === 8
+                ? ""
+                : "opacity-50 cursor-not-allowed"
             }`}
             disabled={plateNumber.length !== 8}
           >
