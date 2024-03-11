@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import Link from "next/link";
 
-export default function LeaveForm() {
-  const [plateNumber, setPlateNumber] = useState("");
+export default function LeaveForm({ plateNumber, onPlateNumberChange }) {
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [paymentConfirmed, setPaymentConfirmed] = useState(false);
   const [loadingConfirmed, setLoadingConfirmed] = useState(false);
@@ -26,6 +24,7 @@ export default function LeaveForm() {
   const handleSubmit = (event) => {
     event.preventDefault();
     // Lógica para lidar com o envio do formulário de saída
+    onPlateNumberChange(plateNumber);
   };
 
   const handleConfirmPayment = () => {
@@ -98,6 +97,13 @@ export default function LeaveForm() {
     }
   };
 
+  const handlePlateNumberChange = (value) => {
+    const regex = /^[A-Z\d-]*$/; // Expressão regular para aceitar apenas letras maiúsculas, números e o símbolo '-'
+    if (regex.test(value)) {
+      onPlateNumberChange(value);
+    }
+  };
+
   return (
     <div className="pp-leave-form">
       {formVisible && !showConfirmation && !leaveCarActive && (
@@ -114,7 +120,7 @@ export default function LeaveForm() {
               id="leave-plate"
               name="leave-plate"
               value={plateNumber}
-              onChange={(e) => setPlateNumber(e.target.value)}
+              onChange={(e) => handlePlateNumberChange(e.target.value)} // Chama a função para validar o input
               className="border border-gray-400 rounded-md p-2 w-full"
               maxLength={8}
               placeholder="AAA-0000"
@@ -165,95 +171,89 @@ export default function LeaveForm() {
               alignItems: "center",
               marginTop: '40px'
             }}
-          >
-            <Image
-              src="\imgs\pp-icon--loading.svg"
-              alt="Descrição da imagem"
-              width={70}
-              height={70}
-            />
+            >
+              <Image
+                src="\imgs\pp-icon--loading.svg"
+                alt="Descrição da imagem"
+                width={70}
+                height={70}
+              />
+            </div>
+            <p style={{ textAlign: 'center', marginTop: '30px' }}>Confirmando...</p>
           </div>
-          <p style={{textAlign: 'center', marginTop: '30px'}}>Confirmando...</p>
-        </div>
-      )}
-
-      {paymentConfirmed && (
-        <div className="pp-ok-confirm">
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              marginTop: '40px'
-            }}
-          >
-            <Image
-              src="\imgs\pp-icon--check.svg"
-              alt="Descrição da imagem"
-              width={70}
-              height={70}
-            />
+        )}
+  
+  {paymentConfirmed && (
+          <div className="pp-ok-confirm">
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                marginTop: '40px'
+              }}
+            >
+              <Image
+                src="\imgs\pp-icon--check.svg"
+                alt="Descrição da imagem"
+                width={70}
+                height={70}
+              />
+            </div>
+            <p style={{ textAlign: 'center', marginTop: '30px' }}>Pago!</p>
           </div>
-          <p style={{textAlign: 'center', marginTop: '30px'}}>Pago!</p>
-        </div>
-      )}
+        )}
 
-      {!leaveCarConfirmed && leaveCarActive && !loadingLeaveCar && showFormAfterConfirmation && (
-        <div className="pp-leave-car">
-          <p>Confirma a saída do veículo da placa abaixo?</p>
-          <h3>{plateNumber}</h3>
-          <button className="leave-car-btn purple-btn" onClick={() => setLoadingLeaveCar(true)}>Liberar Saída</button>
-          <button className="blue-text-btn" onClick={() => setLeaveCarActive(false)}>Voltar</button>
-        </div>
-      )}
-
-      {loadingLeaveCar && (
-        <div className="pp-loading-leave-car">
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              marginTop: '40px'
-            }}
-          >
-            <Image
-              src="\imgs\pp-icon--loading.svg"
-              alt="Descrição da imagem"
-              width={70}
-              height={70}
-            />
+        {!leaveCarConfirmed && leaveCarActive && !loadingLeaveCar && showFormAfterConfirmation && (
+          <div className="pp-leave-car">
+            <p>Confirma a saída do veículo da placa abaixo?</p>
+            <h3>{plateNumber}</h3>
+            <button className="leave-car-btn purple-btn" onClick={() => setLoadingLeaveCar(true)}>Liberar Saída</button>
+            <button className="blue-text-btn" onClick={() => setLeaveCarActive(false)}>Voltar</button>
           </div>
-          <p style={{textAlign: 'center', marginTop: '30px'}}>Confirmando...</p>
-        </div>
-      )}
+        )}
 
-      {leaveCarConfirmed && (
-        <div className="pp-ok-leave-car">
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              marginTop: '40px'
-            }}
-          >
-            <Image
-              src="\imgs\pp-icon--check.svg"
-              alt="Descrição da imagem"
-              width={70}
-              height={70}
-            />
+        {loadingLeaveCar && (
+          <div className="pp-loading-leave-car">
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                marginTop: '40px'
+              }}
+            >
+              <Image
+                src="\imgs\pp-icon--loading.svg"
+                alt="Descrição da imagem"
+                width={70}
+                height={70}
+              />
+            </div>
+            <p style={{ textAlign: 'center', marginTop: '30px' }}>Confirmando...</p>
           </div>
-          <p style={{textAlign: 'center', marginTop: '30px'}}>Saída Liberada</p>
-        </div>
-      )}
+        )}
 
-      <div className="pp-view-history">
-        <Link href='/historico'>
-          <button className="blue-text-btn">Ver histórico</button>
-        </Link>
+        {leaveCarConfirmed && (
+          <div className="pp-ok-leave-car">
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                marginTop: '40px'
+              }}
+            >
+              <Image
+                src="\imgs\pp-icon--check.svg"
+                alt="Descrição da imagem"
+                width={70}
+                height={70}
+              />
+            </div>
+            <p style={{ textAlign: 'center', marginTop: '30px' }}>Saída Liberada</p>
+          </div>
+        )}
       </div>
-    </div>
   );
 }
