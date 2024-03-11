@@ -254,6 +254,20 @@ const parkingData = [
     plate: "AAA-4444",
     reservation: "65eb36",
   },
+  {
+    time: "6 seconds",
+    paid: true,
+    left: true,
+    plate: "AAA-2905",
+    reservation: "65eb36",
+  },
+  {
+    time: "4 days 30 minutes",
+    paid: true,
+    left: true,
+    plate: "AAA-2905",
+    reservation: "65eb36",
+  },
 ];
 
 // Função para lidar com as requisições à API
