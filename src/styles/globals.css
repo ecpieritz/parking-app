@@ -268,4 +268,24 @@ main {
   line-height: 28px;
   padding-left: 20px;
 }
+
+.pp-history-details{
+  row-gap: 20px;
+}
+
+.pp-history-details .card .max-w-md.mx-4.bg-white.rounded-lg.shadow-lg.overflow-hidden{
+  width: 100%;
+  border: 1px solid var(--pp-gray-light);
+}
+
+.pp-history-details .content p{
+  font-size: 16px;
+  text-transform: uppercase;
+  color: var(--pp-gray);
+}
+
+.pp-history-details .content h3{
+  font-size: 24px;
+  color: var(--pp-black);
+}
 /* END History */
