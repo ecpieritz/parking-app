@@ -17,7 +17,6 @@ export default function LeaveForm() {
 
   useEffect(() => {
     if (paymentConfirmed) {
-      // Se o pagamento foi confirmado, mostra o formulário de saída após 3 segundos
       setTimeout(() => {
         setShowFormAfterConfirmation(true);
       }, 3000);
@@ -30,34 +29,73 @@ export default function LeaveForm() {
   };
 
   const handleConfirmPayment = () => {
-    setFormVisible(false); // Oculta o formulário
-    setShowConfirmation(true); // Exibe a div de confirmação
+    setFormVisible(false);
+    setShowConfirmation(true);
   };
 
-  const handleConfirm = () => {
-    setShowConfirmation(false); // Oculta a div de confirmação
-    setLoadingConfirmed(true); // Exibe a div de carregamento de confirmação
-    setTimeout(() => {
-      setLoadingConfirmed(false); // Esconde a div de carregamento após 3 segundos
-      setPaymentConfirmed(true); // Exibe a mensagem de confirmação após o carregamento
-      setTimeout(() => {
-        setPaymentConfirmed(false); // Esconde a mensagem de confirmação após mais 3 segundos
-        setFormVisible(true); // Mostra o formulário novamente
-      }, 3000);
-    }, 3000);
+  const handleConfirm = async () => {
+    setShowConfirmation(false);
+    setLoadingConfirmed(true);
+    try {
+      const response = await fetch("/api/parking", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          plate: plateNumber,
+          time: Math.floor(Math.random() * (604800 - 1) + 1), // Random entre 1 segundo e 7 dias (em segundos)
+          paid: true,
+          left: false,
+          reservation: Math.floor(100000 + Math.random() * 900000), // ID aleatória de 6 dígitos
+        }),
+      });
+      if (response.ok) {
+        setLoadingConfirmed(false);
+        setPaymentConfirmed(true);
+        setTimeout(() => {
+          setPaymentConfirmed(false);
+          setFormVisible(true);
+        }, 3000);
+      } else {
+        throw new Error("Erro ao confirmar pagamento");
+      }
+    } catch (error) {
+      console.error("Erro ao confirmar pagamento:", error);
+      setLoadingConfirmed(false);
+    }
   };
 
-  const handleLeaveCar = () => {
-    setLeaveCarActive(true); // Ativa a div de saída de carro
-    setFormVisible(false); // Oculta o formulário
-    setTimeout(() => {
-      setLoadingLeaveCar(false); // Esconde a div de carregamento após 3 segundos
-      setLeaveCarConfirmed(true); // Ativa a mensagem de saída liberada após o carregamento
-      setTimeout(() => {
-        setLeaveCarConfirmed(false); // Esconde a mensagem de saída liberada após mais 3 segundos
-        router.push("/");
-      }, 3000);
-    }, 3000);
+  const handleLeaveCar = async () => {
+    setLeaveCarActive(true);
+    setFormVisible(false);
+    try {
+      const response = await fetch("/api/parking", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          plate: plateNumber,
+          time: Math.floor(Math.random() * (604800 - 1) + 1), // Random entre 1 segundo e 7 dias (em segundos)
+          paid: false,
+          left: true,
+          reservation: Math.floor(100000 + Math.random() * 900000), // ID aleatória de 6 dígitos
+        }),
+      });
+      if (response.ok) {
+        setLoadingLeaveCar(true);
+        setTimeout(() => {
+          setLeaveCarConfirmed(true);
+          router.push("/");
+        }, 3000);
+      } else {
+        throw new Error("Erro ao registrar saída do carro");
+      }
+    } catch (error) {
+      console.error("Erro ao registrar saída do carro:", error);
+      setLoadingLeaveCar(false);
+    }
   };
 
   return (
