@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function LeaveForm() {
   const [plateNumber, setPlateNumber] = useState("");
@@ -209,6 +210,12 @@ export default function LeaveForm() {
           <p style={{textAlign: 'center', marginTop: '30px'}}>Saída Liberada</p>
         </div>
       )}
+
+      <div className="pp-view-history">
+        <Link href='/historico'>
+          <button className="blue-text-btn">Ver histórico</button>
+        </Link>
+      </div>
     </div>
   );
 }

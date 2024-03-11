@@ -251,3 +251,21 @@ main {
 .blue-text-btn:hover{
   color: #3db1c0;
 }
+
+/* START History */
+.pp-view-history{
+  text-align: center;
+}
+
+.pp-history-title{
+  margin-bottom: 40px;
+}
+
+.pp-history-title h2{
+  color: var(--pp-blue);
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 28px;
+  padding-left: 20px;
+}
+/* END History */
