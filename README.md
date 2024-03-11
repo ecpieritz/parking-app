@@ -2,9 +2,9 @@
 
 ## 🖥 Preview
 <p align = "center">
-  <img src = "x" width = "700" height = "auto">
-  <img src = "x" width = "350" height = "auto">
-  <img src = "x" width = "350" height = "auto">
+  <img src = "https://raw.githubusercontent.com/ecpieritz/parking-app/afab38cfb6d7160d8b3741c49e83081f748d51bb/public/imgs/pp-print-01.png" width = "700" height = "auto">
+  <img src = "https://raw.githubusercontent.com/ecpieritz/parking-app/afab38cfb6d7160d8b3741c49e83081f748d51bb/public/imgs/pp-print-02.png" width = "350" height = "auto">
+  <img src = "https://raw.githubusercontent.com/ecpieritz/parking-app/afab38cfb6d7160d8b3741c49e83081f748d51bb/public/imgs/pp-print-03.png" width = "350" height = "auto">
 </p>
 
 ## 📖 About
