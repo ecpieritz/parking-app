@@ -6,17 +6,71 @@ export default function EntranceForm() {
   const [isRegistering, setIsRegistering] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     setIsRegistering(true);
-    setTimeout(() => {
-      setIsRegistering(false);
-      setIsRegistered(true);
-      setTimeout(() => {
-        setIsRegistered(false);
-        setPlateNumber("");
-      }, 3000); // Mostrar "Registrado!" por 3 segundos
-    }, 3000); // Mostrar "Registrando..." por 3 segundos
+    
+    // Gerando um valor de tempo randomico entre 1 segundo e 7 dias em milissegundos
+    const randomTime = Math.floor(Math.random() * (7 * 24 * 60 * 60 * 1000 - 1000)) + 1000;
+    
+    // Gerando um ID aleatório de 6 dígitos para a reserva
+    const reservationId = Math.floor(100000 + Math.random() * 900000);
+    
+    const data = {
+      plate: plateNumber,
+      time: convertTime(randomTime), // Convertendo o valor de tempo para um formato legível
+      paid: false,
+      left: false,
+      reservation: reservationId.toString(), // Convertendo o ID da reserva para string
+    };
+
+    try {
+      const response = await fetch('/api/parking', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        setIsRegistered(true);
+        setTimeout(() => {
+          setIsRegistering(false);
+          setIsRegistered(false);
+          setPlateNumber("");
+        }, 3000); // Mostrar "Registrado!" por 3 segundos
+      } else {
+        throw new Error('Erro ao enviar dados para a API');
+      }
+    } catch (error) {
+      console.error('Erro:', error);
+      // Lidar com erros de requisição
+    }
+  };
+
+  // Função para converter milissegundos em formato legível
+  const convertTime = (milliseconds) => {
+    const days = Math.floor(milliseconds / (24 * 60 * 60 * 1000));
+    const hours = Math.floor((milliseconds % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000));
+    const minutes = Math.floor((milliseconds % (60 * 60 * 1000)) / (60 * 1000));
+    const seconds = Math.floor((milliseconds % (60 * 1000)) / 1000);
+
+    let timeString = '';
+    if (days > 0) {
+      timeString += `${days} days `;
+    }
+    if (hours > 0) {
+      timeString += `${hours} hours `;
+    }
+    if (minutes > 0) {
+      timeString += `${minutes} minutes `;
+    }
+    if (seconds > 0) {
+      timeString += `${seconds} seconds `;
+    }
+
+    return timeString;
   };
 
   return (
